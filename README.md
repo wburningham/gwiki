@@ -1,1 +1,1 @@
-See https://github.com/wburningham/gwiki/tree/gh-pages
+See http://wburningham.github.com/gwiki/
