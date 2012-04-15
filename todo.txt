@@ -1,0 +1,14 @@
+
+fork me button is native with dataurl
+	use gh-pages branch
+search box on mobile devices
+color of navbar
+responsive less
+
+favicons and mobile icons pull from github repo?
+
+hide recent searches & pages on mobile view?
+
+
+
+

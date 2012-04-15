@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- TODO try to dynamicaaly change this -->
+    <title>GWiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wiki for GitHub pages and git repository Markdown files">
+    <meta name="author" content="wburningham">
+
+    <!-- styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="assets/js/libs/ember-0.9.6.min.js"></script>
+
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script>
+    $(function () {
+    $('.icon-fire, .icon-user, .icon-github').tooltip();
+
+    });
+    </script>
+    <script src="assets/js/app.js"></script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- TODO clickinf on the repo name refreshes the database or does something cool -->
+          <!-- TODO update the repo name -->
+          <a class="brand" href="#">GWiki</a>
+            <div class="pull-right">
+            <form class="navbar-search" action="">
+                <script type="text/x-handlebars">
+  {{view GWiki.SearchBox class="search-query span3" placeholder="Search..."}}
+
+                </script>
+             </form>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row-fluid">
+        <div class="span3">
+  <!--         <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Search Results</li>
+              <li class="active"><a href="#">Active Result</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li class="nav-header"><a href="#">Show More...</a></li>
+            </ul>
+
+
+
+          </div> -->
+          <!--/.well -->
+
+
+
+               <script type="text/x-handlebars">
+                {{#view GWiki.RecentPages}}
+                {{#if recentPages}}
+
+
+                    <div class="well sidebar-nav">
+
+      <ul class="nav nav-list">
+              <li class="nav-header">Recent Pages</li>
+
+  {{#each recentPages}}
+                <li><a href="#">{{page}}</a></li>
+
+  {{/each}}
+
+            </ul>
+
+
+
+
+
+</div>
+          <!--/.well -->
+          {{/if}}
+{{/view}}
+
+  </script>
+
+  <script type="text/x-handlebars">
+                {{#view GWiki.RecentSearches}}
+                {{#if recentSearches}}
+
+
+         <div class="well sidebar-nav">
+
+
+      <ul class="nav nav-list">
+              <li class="nav-header">Recent Searches</li>
+
+  {{#each recentSearches}}
+                <li><a href="#">{{search}}</a></li>
+
+  {{/each}}
+
+            </ul>
+</div><!--/.well -->
+                {{/if}}
+{{/view}}
+
+  </script>
+
+
+
+
+          <div class="well sidebar-nav">
+
+   <script type="text/x-handlebars">
+                {{#view GWiki.CarView}}
+
+My new car is {{color}}.
+
+{{/view}}
+  </script>
+
+ <script type="text/x-handlebars" >
+                {{#view GWiki.UserView}}
+
+ User: {{firstName}} {{lastName}}
+{{#view GWiki.UserView postsBinding="GWiki.userController.posts"
+        hobbiesBinding="GWiki.userController.hobbies"
+        linksBinding="GWiki.userController.links"
+
+      }}
+  <b>Posts:</b> {{posts}}
+  <br>
+  <b>Hobbies:</b> {{hobbies}}
+<ul>
+  {{#each links}}
+    <li>{{name}}!</li>
+  {{/each}}
+  </ul>
+{{/view}}
+{{/view}}
+
+  </script>
+
+
+
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+
+
+
+
+           <script type="text/x-handlebars">
+                {{#view GWiki.SearchResults}}
+
+
+{{#if searchResults}}
+          <div class="row-fluid">
+            <div class="span12">
+              <h1>Search Results ({{searchResultsCount}})</h1>
+            </div><!--/span-->
+          </div><!--/row-->
+
+
+
+
+  {{#each searchResults}}
+
+  <div class="row-fluid">
+            <div class="span12 searchResult">
+              <h2>{{page}} ({{score}})</h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+
+  {{/each}}
+
+
+
+              {{else}}
+              {{#if searched}}
+
+               <div class="row-fluid">
+            <div class="span12 searchResult">
+              <h2>No Matching Pages Were Found</h2>
+                            <p>Try again, or did you mean... </p>
+                             </div><!--/span-->
+          </div><!--/row-->
+{{else}}
+              <div class="hero-unit">
+            <h1>Welcome to GWiki</h1>
+            <p>GWiki is a wiki created using GitHub pages and your repository&#039;s markdown files. An indexed search database is cached locally for fast searching. Try it out by entering a search up top!</p>
+            <p><a class="btn btn-primary btn-large" style="font-weight: normal;">View project on GitHub &raquo;</a></p>
+          </div>
+{{/if}}
+
+
+
+
+  {{/if}}
+
+{{/view}}
+
+  </script>
+
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+
+    <p>
+    Built by <a href="mailto:wburningham@gmail.com"><i class="icon-user" title="wburningham"></i> </a>with <a href="http://emberjs.com/" target="_blank"><i class="icon-fire" title="emeber.js"></i></a> hosted on <a href="https://github.com/wburningham/gwiki/tree/gh-pages" target="_blank"><i class="icon-github" title="github"></i></a>.
+    </p>
+      </footer>
+
+    </div>
+
+
+
+
+
+<div id="myModal" class="modal hide fade in" style="display: none; ">
+            <div class="modal-header">
+
+              <h3>Loading Content</h3>
+            </div>
+            <div class="modal-body">
+<div class="progress progress-striped
+     active">
+  <div class="bar" style="width: 40%;"></div>
+</div>
+              </div>
+            <div class="modal-footer">
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+          </div>
+
+<!--Begin test for JavaScript-->
+<!--TODO set javascript modal test from top-->
+<div id="testJavaScript" class="modal-backdrop fade in">
+  <div class="modal" style="display: block;">
+    <div class="alert alert-error" style="margin-bottom: 0px;">
+      <strong>
+        You must enable JavaScript in your browser to use GWiki.
+      </strong>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  document.getElementById('testJavaScript').style.display = 'none';
+</script>
+<!--End test for JavaScript-->
+
+
+  </body>
+</html>
