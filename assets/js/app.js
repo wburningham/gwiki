@@ -205,7 +205,7 @@ GWiki.Database = Em.ArrayController.create({
             console.log("searching for: " + s);
             // Add search to recent search list, limit them
             var recentSearches = self.get('recentSearches');
-            console.log('recentSearches',recentSearches);
+            console.log('recentSearches', recentSearches);
             var recentSearchesLimit = self.get('recentSearchesLimit');
             var index = -1;
             $.each(recentSearches, function (i, rec) {
@@ -261,13 +261,7 @@ GWiki.Database = Em.ArrayController.create({
                 // Decending
                 return b.score - a.score;
             });
-
-
             self.set('searchResultsCount', resultsArray.length);
-
-
-
-
             var searchResults = self.getPath('searchResults');
             $.each(resultsArray, function (i, rec) {
                 searchResults.pushObject({
@@ -283,13 +277,30 @@ GWiki.Database = Em.ArrayController.create({
     }
 });
 GWiki.SearchResults = Em.View.extend({
-    searchResultsBinding: 'GWiki.Database.searchResults'
-});
-GWiki.RecentSearches = Em.View.extend({
     searchedBinding: 'GWiki.Database.searched',
     searchResultsCountBinding: 'GWiki.Database.searchResultsCount',
+    searchResultsBinding: 'GWiki.Database.searchResults'
+});
+GWiki.Result = Em.View.extend({
+    // searchResultsBinding: 'GWiki.Database.searchResults',
+    test: 'yes',
+    click: function (v) {
+        alert('this', v);
+    },
+});
+GWiki.RecentSearches = Em.View.extend({
     recentSearchesBinding: 'GWiki.Database.recentSearches',
     hasRecentSearchesBinding: 'GWiki.Database.hasRecentSearches'
+});
+GWiki.RecentSearch = Em.View.extend({
+    click: function () {
+        var self = this;
+        var value = this.get('value');
+        if (value) {
+            GWiki.Database.search(value);
+            self.set('value', '');
+        }
+    }
 });
 GWiki.RecentPages = Em.View.extend({
     recentPagesBinding: 'GWiki.Database.RecentPages',
@@ -306,31 +317,11 @@ GWiki.SearchBox = Em.TextField.extend({
         }
     }
 });
-GWiki.userController = Em.Object.create({
-    firstName: "Albert",
-    lastName: "Hofmann",
-    posts: 25,
-    hobbies: "Riding bicycles",
-    links: [
-        {
-        name: 'yes'
-    },
-        {
-        name: 'yyyyyyyyyyy'
-    },
-        {
-        name: 'rrrrrr'
-    },
-        {
-        name: 'fdfddfdf'
+GWiki.Brand = Em.View.extend({
+    repoBinding: 'GWiki.Database.repo',
+    searchedBinding: 'GWiki.Database.searched',
+    click: function () {
+        var self = this;
+        self.set('searched', false);
     }
-            ]
-});
-GWiki.UserView = Em.View.extend({
-    templateName: 'user',
-    firstNameBinding: 'GWiki.userController.firstName',
-    lastNameBinding: 'GWiki.userController.lastName'
-});
-GWiki.CarView = Ember.View.extend({
-    color: 'blue'
 });
